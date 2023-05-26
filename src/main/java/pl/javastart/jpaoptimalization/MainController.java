@@ -24,7 +24,7 @@ public class MainController {
 
     @GetMapping("/najwieksze-miasta")
     public String countryWithBiggestCity(Model model) {
-        List<Country> countries = countryService.findAll();
+        List<Country> countries = countryService.findAllSortedByName();
         model.addAttribute("countries", countries);
 
         return "countryWithBiggestCity";
@@ -32,7 +32,7 @@ public class MainController {
 
     @GetMapping("/kraje-i-jezyki")
     public String countryWithLanguages(Model model) {
-        List<Country> countries = countryService.findAll();
+        List<Country> countries = countryService.findAllSortedByNameDescendingByPercentage();
 
         model.addAttribute("countries", countries);
 
@@ -41,9 +41,9 @@ public class MainController {
 
     @GetMapping("/jezyki-i-kraje")
     public String languagesWithCountries(Model model) {
-        List<CountryLanguage> languages = countryLanguageService.findAll();
-
+        List<CountryLanguage> languages = countryLanguageService.findAllSortAscendingByLanguage();
         model.addAttribute("languages", languages);
+        model.addAttribute("languageInCountry", languages);
 
         return "languagesWithCountries";
     }
